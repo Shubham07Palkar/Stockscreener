@@ -1,5 +1,6 @@
 package com.Atyeti.Stockscrenner.controller;
 
+import com.Atyeti.Stockscrenner.apiResponse.CompanyOverview;
 import com.Atyeti.Stockscrenner.apiResponse.StockApiResponse;
 import com.Atyeti.Stockscrenner.apiResponse.StockDailyData;
 import com.Atyeti.Stockscrenner.entity.StockAnalysis;
@@ -47,5 +48,11 @@ public class StockController {
         StockApiResponse response = stockService.getStock(symbol);
         StockAnalysis stockAnalysis = StockAnalysisService.calculateIndicators(response);
         return ResponseEntity.ok(stockAnalysis);
+    }
+
+    @GetMapping("/overview/{symbol}")
+    public ResponseEntity<CompanyOverview> getCompanyOverview(@PathVariable String symbol){
+        CompanyOverview response = stockService.getCompanyOverview(symbol.toUpperCase());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
