@@ -1,6 +1,7 @@
 package com.Atyeti.Stockscrenner.service;
 
 import com.Atyeti.Stockscrenner.apiResponse.CompanyOverview;
+import com.Atyeti.Stockscrenner.apiResponse.NewsResponse;
 import com.Atyeti.Stockscrenner.apiResponse.StockApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,16 @@ public class StockService {
         String url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol="+symbol+"&apikey="+apiKey;
         try {
             ResponseEntity<CompanyOverview> response = restTemplate.exchange(url, HttpMethod.GET, null, CompanyOverview.class);
+            return response.getBody();
+        } catch (RestClientException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public NewsResponse getCompanyNews(String symbol){
+        String url = "";
+        try{
+            ResponseEntity<NewsResponse> response = restTemplate.exchange(url, HttpMethod.GET, null, NewsResponse.class);
             return response.getBody();
         } catch (RestClientException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package com.Atyeti.Stockscrenner.controller;
 
 import com.Atyeti.Stockscrenner.apiResponse.CompanyOverview;
+import com.Atyeti.Stockscrenner.apiResponse.NewsResponse;
 import com.Atyeti.Stockscrenner.apiResponse.StockApiResponse;
 import com.Atyeti.Stockscrenner.apiResponse.StockDailyData;
 import com.Atyeti.Stockscrenner.entity.StockAnalysis;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -54,5 +56,11 @@ public class StockController {
     public ResponseEntity<CompanyOverview> getCompanyOverview(@PathVariable String symbol){
         CompanyOverview response = stockService.getCompanyOverview(symbol.toUpperCase());
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/news/{symbol}")
+    public ResponseEntity<List<NewsResponse.NewsArticle>> getCompanyNews(@PathVariable String symbol){
+        NewsResponse response = stockService.getCompanyNews(symbol.toUpperCase());
+        return new ResponseEntity<>(response.getArticles(), HttpStatus.OK);
     }
 }
