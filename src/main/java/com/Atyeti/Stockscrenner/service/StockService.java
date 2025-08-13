@@ -41,7 +41,7 @@ public class StockService {
     }
 
     public NewsResponse getCompanyNews(String symbol){
-        String url = "";
+        String url = "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers="+symbol+"&apikey="+apiKey;
         try{
             ResponseEntity<NewsResponse> response = restTemplate.exchange(url, HttpMethod.GET, null, NewsResponse.class);
             return response.getBody();
