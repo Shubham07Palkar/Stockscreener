@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 public class StockService {
     @Value("${alphavantage.api.key}")
     private String apiKey;
-
     ObjectMapper mapper = new ObjectMapper();
     private final RestTemplate restTemplate;
 
@@ -42,7 +41,7 @@ public class StockService {
     }
 
     public NewsResponse getCompanyNews(String symbol){
-        String url = "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=" + symbol + "&apikey=" + apiKey;
+        String url = "";
         try{
             ResponseEntity<NewsResponse> response = restTemplate.exchange(url, HttpMethod.GET, null, NewsResponse.class);
             return response.getBody();
