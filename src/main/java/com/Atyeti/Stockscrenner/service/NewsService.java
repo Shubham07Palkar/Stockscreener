@@ -1,6 +1,6 @@
 package com.Atyeti.Stockscrenner.service;
 
-import com.Atyeti.Stockscrenner.apiResponse.NewsResponseFin;
+import com.Atyeti.Stockscrenner.apiResponse.NewsArticle;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class NewsService {
         this.restTemplate = restTemplate;
     }
 
-    public NewsResponseFin getCompanyNews(String symbol){
+    public NewsArticle[] getCompanyNews(String symbol){
 
         LocalDate toDate = LocalDate.now();
         LocalDate fromDate = toDate.minusDays(30);
@@ -32,7 +32,7 @@ public class NewsService {
 
         String url ="https://finnhub.io/api/v1/company-news?symbol="+symbol+"&from="+fromDate+"&to="+toDate+"&token="+apiKey;
         try {
-            ResponseEntity<NewsResponseFin> response = restTemplate.exchange(url, HttpMethod.GET, null, NewsResponseFin.class);
+            ResponseEntity<NewsArticle[]> response = restTemplate.exchange(url, HttpMethod.GET, null, NewsArticle[].class);
             return response.getBody();
         } catch (RestClientException e) {
             throw new RuntimeException(e);

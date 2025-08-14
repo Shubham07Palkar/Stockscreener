@@ -1,6 +1,6 @@
 package com.Atyeti.Stockscrenner.controller;
 
-import com.Atyeti.Stockscrenner.apiResponse.NewsResponseFin;
+import com.Atyeti.Stockscrenner.apiResponse.NewsArticle;
 import com.Atyeti.Stockscrenner.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class NewsController {
 
     @GetMapping("/news/{symbol}")
     public ResponseEntity<?> getStockNews(@PathVariable String symbol){
-        NewsResponseFin response = newsService.getCompanyNews(symbol.toUpperCase());
-        return new ResponseEntity<>(response.getArticles(), HttpStatus.OK);
+        NewsArticle[] response = newsService.getCompanyNews(symbol.toUpperCase());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
