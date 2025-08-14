@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class NewsService {
 
-    @Value("$finnhub.api.key")
+    @Value("${finnhub.api.key}")
     private String apiKey;
 
     private final RestTemplate restTemplate;
