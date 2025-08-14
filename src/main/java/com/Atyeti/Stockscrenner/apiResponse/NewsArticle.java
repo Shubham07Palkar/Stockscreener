@@ -31,6 +31,37 @@ public class NewsArticle {
     @JsonProperty("id")
     private long id;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getRelated() {
+        return related;
+    }
+
+    public void setRelated(String related) {
+        this.related = related;
+    }
 
     public long getDatetime() {
         return datetime;
